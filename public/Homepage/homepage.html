@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="homepage.css">
+</head>
+
+<body>
+
+  <section class="mb-5">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item disable">
+              <a class="nav-link " href="../Report/Report.html">Report</a>
+            </li>
+            <li class="nav-item disable">
+              <a class="nav-link" href="../Leaderboard/leaderboard.html">Leader Broad</a>
+            </li>
+
+          </ul>
+
+            
+        
+            <div class="d-flex">
+              
+              <label class="me-3 user_profile" id="user_profile" style="display: none;">user name</label>
+              <button class="btn btn-warning me-3" type="button" id="premium" style="display: none;">Buy Premium</button>
+
+
+                <button class="btn btn-outline-danger me-3" id="signOut" type="button">Sign Out </button>
+            </div>
+            
+
+            
+
+          
+        </div>
+      </div>
+    </nav>
+  </section>
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-lg-5 " style="height: 92vh;">
+
+
+        <div class="container   ">
+          <h1 class="mb-5">Enter Your Day Expense</h1>
+          <form onsubmit="expenseForm(event)">
+            <!-- Price Input -->
+            <div class="mb-4">
+              <input type="number" value="" hidden id="hidden_input">
+              <label for="priceInput" class="form-label">Price</label>
+              <input type="number" class="form-control" id="priceInput" name="price" placeholder="Enter expense amount">
+            </div>
+
+            <!-- Category Dropdown -->
+            <div class="mb-4">
+              <label for="categoryDropdown" class="form-label">Category</label>
+              <div class="input-group mb-3">
+                <select class="form-select" id="categoryDropdown" name="category">
+                  <option selected>Select a category</option>
+                  <option value="Housing">Housing</option>
+                  <option value="Transportation">Transportation</option>
+                  <option value="Food">Food</option>
+                  <option value="Healthcare">Healthcare</option>  
+                   
+                  <option value="clothing">Clothing</option>
+                  <option value="entertainment">Entertainment</option>
+                  <option value="personal Care">Personal Care</option>
+                  <option value="education">Education</option>
+                  <option value="debt">Debt</option>  
+
+                  <option value="savings">Savings</option>
+                  <option value="Investments">Investments</option>
+                  <option value="gifts">Gifts</option>
+                  <option value="travel">Travel</option>
+                  <option value="pets">Pets</option>
+                  <option value="charitable Donations">Charitable Donations</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Description Input -->
+            <div class="mb-2">
+              <label for="descriptionInput" class="form-label">Description</label>
+              <textarea class="form-control" id="descriptionInput" rows="3" placeholder="Enter a description"
+                name="description"></textarea>
+            </div >
+              <div id="container_fileupload" style="display: none;">
+              <label class="form-label">Please upload your bill</label>
+              <input type="file" id="fileInputName" name="fileInputName" accept="image/*,.pdf" class="form-control mb-3">
+            </div>
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-12  col-lg-7" style="height: 92vh;">
+
+
+        <!-- Scrollable List -->
+        <label>Select a Date:</label>
+        <input class="form-control mb-4" type="date" id="date" name="date">
+        <h5 class="mb-4">Expenses for Date: <span id="headerDate">15-October-2024</span></h5>
+
+        <div class="table-responsive" style="max-height: 60vh; overflow-y: auto;">
+          <table class="table table-hover">
+            <thead class="table-dark sticky-top">
+              <tr>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody class="table-group-divider" id="expense-list-tbody">
+
+
+
+
+
+            </tbody>
+            <tfoot class="sticky-bottom">
+              <tr>
+                <td colspan="2"><strong>Total Expense:</strong></td>
+                <td class="text-danger"><strong id="sum"></strong></td>
+                <td colspan="2"></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+ <!-- Modal Structure -->
+    <div class="modal fade" id="fileModal" tabindex="-1" aria-labelledby="fileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="fileModalLabel">File Viewer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body d-flex flex-column align-items-center">
+                    <div id="modalContent" class="text-center mb-3">
+                        <!-- Content will be loaded dynamically here -->
+                    </div>
+                    <div class="d-flex justify-content-center mb-3">
+                        <button class="btn btn-success" id="downloadButton" style="display: none;">Download</button>
+                        <!-- <button class="btn btn-danger ms-3" type="button">Delete</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js" integrity="sha512-DdX/YwF5e41Ok+AI81HI8f5/5UsoxCVT9GKYZRIzpLxb8Twz4ZwPPX+jQMwMhNQ9b5+zDEefc+dcvQoPWGNZ3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="./homepage.js"></script>
+<!-- <script src="../main/shared.js"></script> -->
+
+
+</html>

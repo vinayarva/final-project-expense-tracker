@@ -1,0 +1,15 @@
+
+.user_profile{
+    text-transform:capitalize;
+    color: black;
+    padding: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: center;
+    border-radius: 50px;
+}
+
+.hidden-on-load {
+    display: none;
+}
+
