@@ -40,7 +40,7 @@ async function fetchReport() {
             
             
             const [year, month] = monthAndYear.split('-').map(Number);
-            response = await axios.get("http://localhost:4000/report/monthly", {
+            response = await axios.get("http://13.61.11.175/report/monthly", {
                 params: {
                     month: month,
                     year: year,
@@ -53,7 +53,7 @@ async function fetchReport() {
 
         } else {
 
-            response = await axios.get("http://localhost:4000/report/yearly", {
+            response = await axios.get("http://13.61.11.175/report/yearly", {
                 params: {
                     year: year,
                     page: currentPage,
@@ -186,7 +186,7 @@ async function Download(){
         let response ; 
         if(reportType === "monthly"){
             const [year, month] = monthAndYear.split('-').map(Number);
-            response = await axios.get("http://localhost:4000/report/monthly/download", {
+            response = await axios.get("http://13.61.11.175/report/monthly/download", {
                 params: {
                     month: month,
                     year: year
@@ -194,7 +194,7 @@ async function Download(){
                 headers: { Authorization: localStorage.getItem("token") }
             });
         }else{
-            response = await axios.get("http://localhost:4000/report/yearly/download", {
+            response = await axios.get("http://13.61.11.175/report/yearly/download", {
                 params: {
                     year: year
                 },

@@ -72,7 +72,7 @@ function SendEmail(WhomToSend,key){
                                                      password has been generated for you. To reset your password, click the
                                                      following link and follow the instructions.
                                                  </p>
-                                                 <a href="http://localhost:4000/passwordreset/${key}"
+                                                 <a href="http://13.61.11.175/passwordreset/${key}"
                                                      style="background:#20e277;text-decoration:none !important; font-weight:500; margin-top:35px; color:#fff;text-transform:uppercase; font-size:14px;padding:10px 24px;display:inline-block;border-radius:50px;">Reset
                                                      Password</a>
                                              </td>

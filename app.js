@@ -58,7 +58,7 @@ sequelize
     .sync({ alter : false }) // Adjust force to true for development, false for production
     .then(() => {
         app.listen(process.env.PORT, '0.0.0.0', () => {
-            // console.log('Server is running on http://localhost:4000/');
+            // console.log('Server is running on http://13.61.11.175/');
         });
     })
     .catch((err) => {

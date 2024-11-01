@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded",async()=>{
         const date = new Date();
         const month = date.getMonth() + 1; 
             const year = date.getFullYear();
-            const response = await axios.get("http://localhost:4000/leaderboard", {
+            const response = await axios.get("http://13.61.11.175/leaderboard", {
                                                 params: {
                                                     month: month,
                                                     year: year, 

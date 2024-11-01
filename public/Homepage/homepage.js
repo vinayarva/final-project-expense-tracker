@@ -11,7 +11,7 @@ date.max = formattedToday
 
 document.getElementById("signOut").addEventListener("click",()=>{
     localStorage.clear();
-    window.location.href = "http://localhost:4000/Loginpage/loginpage.html"
+    window.location.href = "http://13.61.11.175/Loginpage/loginpage.html"
 })
 
 date.addEventListener("change",(event)=>{
@@ -30,7 +30,7 @@ date.addEventListener("change",(event)=>{
 
 
 function fetchExpense(value){
-    return axios.post("http://localhost:4000/expenseFetch",{date : value},{
+    return axios.post("http://13.61.11.175/expenseFetch",{date : value},{
         headers :{Authorization : localStorage.getItem("token")}}).then((result) => {
             // displayExpense(result.data.content)
             
@@ -67,7 +67,7 @@ async function expenseForm(event) {
 
     if(UpdateID){
 
-      await axios.put(`http://localhost:4000/update/${UpdateID}`, formData, {
+      await axios.put(`http://13.61.11.175/update/${UpdateID}`, formData, {
         headers: { Authorization: localStorage.getItem("token") ,'Content-Type': 'multipart/form-data' },
       });
 
@@ -76,7 +76,7 @@ async function expenseForm(event) {
 
     }else{
 
-      await axios.post("http://localhost:4000/expenseAdd", formData, {
+      await axios.post("http://13.61.11.175/expenseAdd", formData, {
         headers: { Authorization: localStorage.getItem("token") ,'Content-Type': 'multipart/form-data'},
       });
   
@@ -156,7 +156,7 @@ function displayExpense(data) {
 
           const ID = e.target.getAttribute("data.id");
 
-          const result =  await axios.get("http://localhost:4000/editFetch/"+ID, {
+          const result =  await axios.get("http://13.61.11.175/editFetch/"+ID, {
             headers: { Authorization: localStorage.getItem("token") },
           })
             const url = result.data.content.fileLink
@@ -227,7 +227,7 @@ function editExpense(id){
 
   document.getElementById("hidden_input").value = id
 
-  axios.get("http://localhost:4000/editFetch/"+id, {
+  axios.get("http://13.61.11.175/editFetch/"+id, {
     headers: { Authorization: localStorage.getItem("token") },
   }).then((result) => {
       
@@ -246,7 +246,7 @@ async function  deleteExpense(id){
 
   try{
 
-    await axios.delete("http://localhost:4000/deleteExpense/"+id, {
+    await axios.delete("http://13.61.11.175/deleteExpense/"+id, {
       headers: { Authorization: localStorage.getItem("token") },
     })
 
@@ -307,7 +307,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 document.getElementById("premium").addEventListener("click", async (e) => {
     try {
-        const response = await axios.get("http://localhost:4000/expense/premium", {
+        const response = await axios.get("http://13.61.11.175/expense/premium", {
             headers: { Authorization: `${localStorage.getItem("token")}` },
         });
 
@@ -326,7 +326,7 @@ document.getElementById("premium").addEventListener("click", async (e) => {
 
                 // Optionally, send the payment details back to the server for verification
                 const result = await axios.post(
-                    "http://localhost:4000/expense/verify",
+                    "http://13.61.11.175/expense/verify",
                     paymentResponse,
                     {
                         headers: { Authorization: `${localStorage.getItem("token")}` },

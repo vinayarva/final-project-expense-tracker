@@ -8,7 +8,7 @@ function signUpForm(event) {
   };
 
   axios
-    .post("http://localhost:4000/signUp", userDetails)
+    .post("http://13.61.11.175/signUp", userDetails)
     .then((result) => {
       alert(result.data.message);
       window.location.href = "/Loginpage/loginpage.html";
