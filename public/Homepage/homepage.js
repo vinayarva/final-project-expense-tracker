@@ -11,7 +11,7 @@ date.max = formattedToday
 
 document.getElementById("signOut").addEventListener("click",()=>{
     localStorage.clear();
-    window.location.href = "http://13.61.11.175/Loginpage/loginpage.html"
+    window.location.href = "Loginpage/loginpage.html"
 })
 
 date.addEventListener("change",(event)=>{
