@@ -387,35 +387,38 @@ async function getMonthlyReportForUser(userID, year) {
   }
 
 
-  async function leaderboard(inputData) {
+async function leaderboard(inputData) {
     try {
         const startDate = new Date(inputData.year, inputData.month - 1, 1); 
         const endDate = new Date(inputData.year, inputData.month, 0); 
 
         const query = `
            SELECT 
-            u.userName,
-            SUM(e.price) AS totalExpense
-        FROM 
-            Users u
-        LEFT JOIN 
-            Expenses e ON u.ID = e.userId  
-        WHERE 
-             e.date >= :startDate AND e.date <= :endDate  
-        GROUP BY 
-            u.ID, u.userName
-        ORDER BY 
-            totalExpense DESC;
-                `;
+               u.userName,
+               SUM(e.price) AS totalExpense
+           FROM 
+               users u
+           LEFT JOIN 
+               expenses e ON u.ID = e.userId  
+           WHERE 
+               e.date >= :startDate AND e.date <= :endDate  
+           GROUP BY 
+               u.ID, u.userName
+           ORDER BY 
+               totalExpense DESC;
+        `;
 
-        const replacements = { startDate: startDate.toISOString().split('T')[0], endDate: endDate.toISOString().split('T')[0] };
+        const replacements = { 
+            startDate: startDate.toISOString().split('T')[0], 
+            endDate: endDate.toISOString().split('T')[0] 
+        };
 
         const results = await sequelize.query(query, {
             replacements,
             type: sequelize.QueryTypes.SELECT
         });
 
-            return results;
+        return results;
     } catch (error) {
         console.error('Error fetching expenses:', error);
     }

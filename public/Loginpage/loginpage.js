@@ -16,7 +16,7 @@ function loginForm(event){
         console.log(err)
         if(err.status === 404){
             alert(err.response.data.message)
-            window.location.href = "../SignUp page/Signup.html"
+            window.location.href = "../SignUppage/Signup.html"
         }else{
             alert(err.response.data.message)
         }
